@@ -6,6 +6,7 @@ import { Message, GuildMember, VoiceChannel } from 'discord.js';
 import { createMockMessage } from '../utils/testUtils';
 import { AudioManager } from '../utils/audioManager';
 import { AudioPlayerManager } from '../utils/audioPlayer';
+import { CommandManager } from '../utils/commandManager';
 
 jest.mock('@discordjs/voice', () => ({
   joinVoiceChannel: jest.fn(() => ({
@@ -14,46 +15,80 @@ jest.mock('@discordjs/voice', () => ({
   })),
 }));
 
-jest.mock('../utils/audioManager', () => ({
-  AudioManager: {
-    getAvailableSongs: jest.fn(() => ['audio.mp3', 'bakabakabaka.mp3', 'navidad.mp3']),
-    songExists: jest.fn((songName: string) =>
-      ['audio.mp3', 'bakabakabaka.mp3', 'navidad.mp3'].includes(songName)
-    ),
-  },
-}));
+jest.mock('../utils/commandManager', () => {
+  return {
+    CommandManager: jest.fn().mockImplementation(() => {
+      return {
+        registerCommand: jest.fn(),
+        getCommand: jest.fn((name: string) => {
+          if (name === 'ping') return PingCommand;
+          if (name === 'play') return PlayCommand;
+          if (name === 'help') return HelpCommand;
+          if (name === 'songs') return SongsCommand;
+          return undefined;
+        }),
+        getAllCommands: jest.fn(() => [PingCommand, PlayCommand, HelpCommand, SongsCommand]),
+        hasCommand: jest.fn((name: string) => ['ping', 'play', 'help', 'songs'].includes(name)),
+      };
+    }),
+  };
+});
 
-jest.mock('../utils/audioPlayer', () => ({
-  AudioPlayerManager: {
-    play: jest.fn(),
-  },
-}));
+jest.mock('../utils/audioManager', () => {
+  return {
+    AudioManager: {
+      getAvailableSongs: jest.fn(() => ['audio.mp3', 'bakabakabaka.mp3', 'navidad.mp3']),
+      songExists: jest.fn((songName: string) =>
+        ['audio.mp3', 'bakabakabaka.mp3', 'navidad.mp3'].includes(songName)
+      ),
+    },
+  };
+});
+
+jest.mock('../utils/audioPlayer', () => {
+  return {
+    AudioPlayerManager: {
+      play: jest.fn(),
+      stop: jest.fn(),
+    },
+  };
+});
+
+// Función auxiliar para inicializar el entorno de pruebas
+const setupTestEnvironment = () => {
+  const mockMessage = createMockMessage();
+  const commandManager = new CommandManager();
+
+  commandManager.registerCommand(PingCommand);
+  commandManager.registerCommand(PlayCommand);
+  commandManager.registerCommand(HelpCommand);
+  commandManager.registerCommand(SongsCommand);
+
+  return { mockMessage, commandManager };
+};
 
 describe('Command Tests', () => {
-  let mockMessage: Partial<Message>;
-
-  beforeEach(() => {
-    mockMessage = createMockMessage();
-  });
-
   describe('PingCommand', () => {
     it('should reply with Pong and calculate latency', async () => {
-      const command = PingCommand;
-      await command.execute(mockMessage as Message);
+      const { mockMessage, commandManager } = setupTestEnvironment();
+      const command = commandManager.getCommand('ping');
+
+      await command?.execute(mockMessage as Message, []);
 
       expect(mockMessage.reply).toHaveBeenCalledWith('Ping...');
       expect(mockMessage.reply).toHaveBeenCalledWith(
-        expect.stringMatching(/Pong! 🏓\nLatencia: \d+ms/)
+        expect.stringMatching(/Pong! \u{1F3D3}\nLatencia: \d+ms/u)
       );
     });
   });
 
   describe('PlayCommand', () => {
     it('should reply with an error if no arguments are provided', async () => {
-      const command = PlayCommand;
+      const { mockMessage, commandManager } = setupTestEnvironment();
+      const command = commandManager.getCommand('play');
       const args: string[] = [];
 
-      await command.execute(mockMessage as Message, args);
+      await command?.execute(mockMessage as Message, args);
 
       expect(mockMessage.reply).toHaveBeenCalledWith(
         'Por favor, proporciona un archivo de audio para reproducir.'
@@ -61,7 +96,8 @@ describe('Command Tests', () => {
     });
 
     it('should reply with a success message when a valid file is provided', async () => {
-      const command = PlayCommand;
+      const { mockMessage, commandManager } = setupTestEnvironment();
+      const command = commandManager.getCommand('play');
       const args: string[] = ['audio.mp3'];
 
       const mockVoiceChannel = {} as VoiceChannel;
@@ -73,19 +109,21 @@ describe('Command Tests', () => {
 
       Object.defineProperty(mockMessage, 'member', { value: mockGuildMember });
 
-      await command.execute(mockMessage as Message, args);
+      jest.spyOn(AudioManager, 'songExists').mockReturnValueOnce(true);
 
-      expect(mockMessage.reply).toHaveBeenCalledWith('🎵 Reproduciendo: **audio.mp3**');
+      await command?.execute(mockMessage as Message, args);
+
+      expect(mockMessage.reply).toHaveBeenCalledWith('\u{1F3B5} Reproduciendo: **audio.mp3**');
       expect(AudioPlayerManager.play).toHaveBeenCalledWith(mockMessage, 'audio.mp3');
     });
   });
 
   describe('HelpCommand', () => {
     it('should reply with a list of available commands', async () => {
-      const command = HelpCommand;
-      const args: string[] = [];
+      const { mockMessage, commandManager } = setupTestEnvironment();
+      const command = commandManager.getCommand('help');
 
-      await command.execute(mockMessage as Message, args);
+      await command?.execute(mockMessage as Message, []);
 
       expect(mockMessage.reply).toHaveBeenCalledWith(
         expect.stringMatching(/Comandos disponibles:/)
@@ -95,9 +133,10 @@ describe('Command Tests', () => {
 
   describe('SongsCommand', () => {
     it('should reply with a list of available songs', async () => {
-      const command = SongsCommand;
+      const { mockMessage, commandManager } = setupTestEnvironment();
+      const command = commandManager.getCommand('songs');
 
-      await command.execute(mockMessage as Message);
+      await command?.execute(mockMessage as Message, []);
 
       expect(mockMessage.reply).toHaveBeenCalledWith(
         expect.stringMatching(/Canciones disponibles:/)
@@ -112,9 +151,10 @@ describe('Command Tests', () => {
     it('should reply with no songs available if the list is empty', async () => {
       jest.spyOn(AudioManager, 'getAvailableSongs').mockReturnValueOnce([]);
 
-      const command = SongsCommand;
+      const { mockMessage, commandManager } = setupTestEnvironment();
+      const command = commandManager.getCommand('songs');
 
-      await command.execute(mockMessage as Message);
+      await command?.execute(mockMessage as Message, []);
 
       expect(mockMessage.reply).toHaveBeenCalledWith('No hay canciones disponibles en el momento.');
     });

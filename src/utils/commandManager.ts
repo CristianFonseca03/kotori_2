@@ -2,18 +2,10 @@ import { Collection } from 'discord.js';
 import { Command } from '../types/Command';
 
 export class CommandManager {
-  private static instance: CommandManager;
   private commands: Collection<string, Command>;
 
-  private constructor() {
+  constructor() {
     this.commands = new Collection<string, Command>();
-  }
-
-  public static getInstance(): CommandManager {
-    if (!CommandManager.instance) {
-      CommandManager.instance = new CommandManager();
-    }
-    return CommandManager.instance;
   }
 
   public registerCommand(command: Command): void {

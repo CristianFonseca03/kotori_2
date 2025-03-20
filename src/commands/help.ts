@@ -11,13 +11,14 @@ class HelpCommand extends BaseCommand {
 
   async execute(message: Message, args: string[]): Promise<void> {
     const commandName = args[0]?.toLowerCase();
-    const commands = CommandManager.getInstance().getAllCommands();
+    const commandManager = new CommandManager(); // Crear instancia de CommandManager
+    const commands = commandManager.getAllCommands();
 
     if (commandName) {
       const command = commands.find(
-        (cmd) =>
+        (cmd: { name: string; aliases?: string[] }) =>
           cmd.name.toLowerCase() === commandName ||
-          cmd.aliases?.some((alias) => alias.toLowerCase() === commandName)
+          cmd.aliases?.some((alias: string) => alias.toLowerCase() === commandName)
       );
 
       if (!command) {
@@ -27,7 +28,7 @@ class HelpCommand extends BaseCommand {
       }
 
       const aliasesText = command.aliases?.length
-        ? `\n**Aliases:** ${command.aliases.map((alias) => `\`${config.prefix}${alias}\``).join(', ')}`
+        ? `\n**Aliases:** ${command.aliases.map((alias: string) => `\`${config.prefix}${alias}\``).join(', ')}`
         : '';
 
       const response = `📚 **Comando:** \`${config.prefix}${command.name}\`${aliasesText}\n\n**Descripción:** ${command.description}`;
@@ -36,7 +37,10 @@ class HelpCommand extends BaseCommand {
     }
 
     const commandList = commands
-      .map((cmd) => `\`${config.prefix}${cmd.name}\` - ${cmd.description}`)
+      .map(
+        (cmd: { name: string; description: string }) =>
+          `\`${config.prefix}${cmd.name}\` - ${cmd.description}`
+      )
       .join('\n');
 
     const response = `📚 **Comandos disponibles:**\n\n${commandList}\n\nPara más información sobre un comando específico, usa \`${config.prefix}help <comando>\``;

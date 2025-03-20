@@ -21,7 +21,7 @@ class KotoriClient extends Client {
 }
 
 const client = new KotoriClient();
-const commandManager = CommandManager.getInstance();
+const commandManager = new CommandManager();
 
 // Registrar comandos
 commandManager.registerCommand(pingCommand);
