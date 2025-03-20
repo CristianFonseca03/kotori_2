@@ -109,6 +109,9 @@ Para producción:
 
 ```bash
 npm run build
+```
+
+```bash
 npm start
 ```
 
