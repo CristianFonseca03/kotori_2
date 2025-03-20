@@ -1,8 +1,12 @@
 {
-  "name": "discord-bot",
+  "name": "kotori2",
   "version": "1.0.0",
   "description": "Un bot de Discord simple con comando ping",
   "main": "src/index.js",
+  "engines": {
+    "node": ">=22.14.0",
+    "npm": ">=10.2.4"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"

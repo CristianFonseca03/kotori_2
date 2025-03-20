@@ -1,11 +1,11 @@
-# Bot de Discord Simple
+# Kotori2 - Bot de Discord
 
 Este es un bot de Discord básico creado con Node.js y Discord.js que implementa un comando simple de ping.
 
 ## Requisitos Previos
 
-- Node.js (versión 16.9.0 o superior)
-- npm (incluido con Node.js)
+- Node.js (versión 22.14.0 o superior)
+- npm (versión 10.2.4 o superior)
 - Un bot de Discord registrado en el [Portal de Desarrolladores de Discord](https://discord.com/developers/applications)
 
 ## Configuración
@@ -54,7 +54,7 @@ npm start
 
 ## Comandos Disponibles
 
-- `!ping`: Responde con "Pong!" y muestra la latencia del bot
+- `~ping`: Responde con "Pong!" y muestra la latencia del bot
 
 ## Contribuir
 

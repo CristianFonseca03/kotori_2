@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
     token: process.env.DISCORD_TOKEN,
-    prefix: '!',
+    prefix: '~',
     commands: {
         ping: {
             name: 'ping',
