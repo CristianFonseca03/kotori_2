@@ -1,6 +1,6 @@
 {
   "name": "kotori2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bot de Discord con soporte para reproducción de audio",
   "main": "dist/index.js",
   "engines": {
@@ -19,11 +19,17 @@
   "notes": {
     "check": "El formato se ha eliminado temporalmente de 'check' debido a problemas de permisos. Para resolverlo: 1) Instalar prettier globalmente (npm install -g prettier@3.2.5), 2) Ejecutar: chmod +x ./node_modules/prettier/bin-prettier.js, 3) Cambiar el script por: npx prettier --write \"src/**/*.ts\""
   },
-  "keywords": ["discord", "bot", "typescript", "audio"],
+  "keywords": [
+    "discord",
+    "bot",
+    "typescript",
+    "audio"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@discordjs/voice": "^0.16.1",
+    "chalk": "^5.4.1",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
   },
@@ -42,4 +48,4 @@
     "minorVersions": "Nuevas funcionalidades que mantienen compatibilidad",
     "patchVersions": "Correcciones de errores que mantienen compatibilidad"
   }
-} 
+}
