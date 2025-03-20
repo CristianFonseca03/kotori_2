@@ -29,7 +29,8 @@ commandManager.registerCommand(playCommand);
 commandManager.registerCommand(songsCommand);
 commandManager.registerCommand(helpCommand);
 
-client.once('ready', (): void => {
+client.once('ready', async (): Promise<void> => {
+  await CommandLogger.logPrefix(config.prefix);
   CommandLogger.logInfo(`Bot está listo! Conectado como ${client.user?.tag}`);
 });
 

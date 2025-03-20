@@ -1,21 +1,11 @@
 import { Message } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const chalk = require('chalk');
 
 export class CommandLogger {
   private static logFile = path.join(process.cwd(), 'history.log');
-  private static colors = {
-    reset: '\x1b[0m',
-    bright: '\x1b[1m',
-    dim: '\x1b[2m',
-    red: '\x1b[31m',
-    green: '\x1b[32m',
-    yellow: '\x1b[33m',
-    blue: '\x1b[34m',
-    magenta: '\x1b[35m',
-    cyan: '\x1b[36m',
-    white: '\x1b[37m',
-  };
 
   public static logCommand(message: Message, commandName: string, args: string[]): void {
     const timestamp = new Date().toLocaleString();
@@ -28,10 +18,8 @@ export class CommandLogger {
 
     // Formato para la terminal
     const terminalEntry = [
-      `${this.colors.dim}[${timestamp}]${this.colors.reset}`,
-      `${this.colors.cyan}${username}${this.colors.reset}`,
-      `${this.colors.yellow}${commandName}${this.colors.reset}`,
-      args.length > 0 ? `${this.colors.magenta}${args.join(' ')}${this.colors.reset}` : '',
+      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.magenta(username)} ${chalk.default.yellow(commandName)}`,
+      args.length > 0 ? `${chalk.default.magenta(args.join(' '))}` : '',
     ]
       .filter(Boolean)
       .join(' ');
@@ -49,9 +37,7 @@ export class CommandLogger {
 
     // Formato para la terminal
     const terminalEntry = [
-      `${this.colors.dim}[${timestamp}]${this.colors.reset}`,
-      `${this.colors.green}Respuesta a ${username}:${this.colors.reset}`,
-      `${this.colors.white}${response}${this.colors.reset}`,
+      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.green(`Respuesta a ${username}:`)} ${chalk.default.white(response)}`,
     ].join(' ');
 
     console.log(terminalEntry);
@@ -66,7 +52,7 @@ export class CommandLogger {
 
     // Log en terminal
     console.log(
-      `${this.colors.dim}[${timestamp}]${this.colors.reset} ${this.colors.red}ERROR:${this.colors.reset} ${error.message}`
+      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.bgRed.black('ERROR:')} ${error.message}`
     );
   }
 
@@ -79,7 +65,14 @@ export class CommandLogger {
 
     // Log en terminal
     console.log(
-      `${this.colors.dim}[${timestamp}]${this.colors.reset} ${this.colors.blue}INFO:${this.colors.reset} ${message}`
+      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.bgBlue.black('INFO:')} ${message}`
+    );
+  }
+
+  public static async logPrefix(prefix: string): Promise<void> {
+    const timestamp = new Date().toLocaleString();
+    console.log(
+      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.bgGreen.black(`Prefijo: ${prefix}`)}`
     );
   }
 }
