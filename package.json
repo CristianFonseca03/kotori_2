@@ -17,9 +17,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "release:patch": "npm version patch && git push --follow-tags",
-    "release:minor": "npm version minor && git push --follow-tags",
-    "release:major": "npm version major && git push --follow-tags",
+    "release:patch": "npm version patch && git push --follow-tags && npm run deploy:docs",
+    "release:minor": "npm version minor && git push --follow-tags && npm run deploy:docs",
+    "release:major": "npm version major && git push --follow-tags && npm run deploy:docs",
     "deploy:docs": "npm run test:coverage || true && gh-pages -d docs"
   },
   "notes": {

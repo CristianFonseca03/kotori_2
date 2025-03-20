@@ -1,6 +1,6 @@
 # Kotori2 - Bot de Discord
 
-[![Cobertura de Pruebas](https://img.shields.io/badge/cobertura-70%25-brightgreen.svg)](https://cristianfonseca03.github.io/kotori_2/)
+[![Cobertura de Pruebas](https://img.shields.io/badge/cobertura-41.96%25-yellow.svg)](https://cristianfonseca03.github.io/kotori_2/)
 [![Pruebas](https://img.shields.io/badge/pruebas-jest-blue.svg)](https://jestjs.io/)
 
 Este es un bot de Discord básico creado con Node.js, TypeScript y Discord.js que implementa comandos de ping y reproducción de audio.
@@ -153,7 +153,7 @@ El proyecto tiene establecido un objetivo mínimo de cobertura del 70% para:
 Puedes ver los informes de cobertura actualizados en:
 
 - Local: `docs/coverage/index.html` (después de ejecutar `npm run test:coverage`)
-- En línea: [https://github.com/CristianFonseca03/kotori_2/coverage/](https://cristianfonseca03.github.io/kotori_2/)
+- En línea: [https://cristianfonseca03.github.io/kotori_2/](https://cristianfonseca03.github.io/kotori_2/)
 
 ## Despliegue en GitHub Pages
 
