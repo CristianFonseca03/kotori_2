@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits, Collection, Message } from 'discord.js';
 import config from './config';
 import pingCommand from './commands/ping';
+import playCommand from './commands/play';
 import { Command } from './types/Command';
 
 class KotoriClient extends Client {
@@ -11,8 +12,9 @@ class KotoriClient extends Client {
       intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
-      ]
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildVoiceStates,
+      ],
     });
     this.commands = new Collection<string, Command>();
   }
@@ -20,6 +22,7 @@ class KotoriClient extends Client {
 
 const client = new KotoriClient();
 client.commands.set(pingCommand.name, pingCommand);
+client.commands.set(playCommand.name, playCommand);
 
 client.once('ready', (): void => {
   console.log(`Bot está listo! Conectado como ${client.user?.tag}`);
@@ -43,4 +46,4 @@ client.on('messageCreate', async (message: Message): Promise<void> => {
   }
 });
 
-client.login(config.token); 
+client.login(config.token);

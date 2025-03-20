@@ -6,4 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 dist/
-*.tsbuildinfo 
+*.tsbuildinfo
+src/assets/audio/*
+!src/assets/audio/.gitkeep 
