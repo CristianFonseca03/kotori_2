@@ -1,6 +1,6 @@
 {
   "name": "kotori2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Bot de Discord con soporte para reproducción de audio",
   "main": "dist/index.js",
   "engines": {
@@ -32,7 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/voice": "^0.16.1",
-    "chalk": "^5.4.1",
+    "chalk": "4.1.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
   },
