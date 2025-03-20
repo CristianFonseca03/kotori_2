@@ -4,73 +4,89 @@ Este es un bot de Discord básico creado con Node.js, TypeScript y Discord.js qu
 
 ## Requisitos Previos
 
+- Ubuntu (versión 20.04 o superior)
 - Node.js (versión 22.14.0 o superior)
 - npm (versión 10.2.4 o superior)
+- FFmpeg para la reproducción de audio
+- libopus-dev para la codificación de audio
+- libsodium-dev para la encriptación
 - Un bot de Discord registrado en el [Portal de Desarrolladores de Discord](https://discord.com/developers/applications)
 
 ## Instalación en Ubuntu
 
 1. Instalar las dependencias del sistema necesarias:
 
-```bash
-# Actualizar los repositorios
-sudo apt update
+   ```bash
+   # Actualizar los repositorios
+   sudo apt update
+   ```
 
-# Instalar FFmpeg para la reproducción de audio
-sudo apt install -y ffmpeg
+   ```bash
+   # Instalar FFmpeg para la reproducción de audio
+   sudo apt install -y ffmpeg
+   ```
 
-# Instalar libopus-dev para la codificación de audio
-sudo apt install -y libopus-dev
+   ```bash
+   # Instalar libopus-dev para la codificación de audio
+   sudo apt install -y libopus-dev
+   ```
 
-# Instalar libsodium-dev para la encriptación
-sudo apt install -y libsodium-dev
-```
+   ```bash
+   # Instalar libsodium-dev para la encriptación
+   sudo apt install -y libsodium-dev
+   ```
 
 2. Clona este repositorio:
 
-```bash
-git clone [URL_DEL_REPOSITORIO]
-cd kotori2
-```
+   ```bash
+   git clone [URL_DEL_REPOSITORIO]
+   cd kotori2
+   ```
 
 3. Instala las dependencias de Node.js:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 4. Crea un archivo `.env` en la raíz del proyecto y añade tu token de Discord:
 
-```
-DISCORD_TOKEN=tu_token_aquí
-```
+   ```
+   DISCORD_TOKEN=tu_token_aquí
+   ```
 
 ## Estructura del Proyecto
 
 ```
 kotori2/
 ├── src/
-│   ├── index.ts           # Punto de entrada principal
-│   ├── config.ts          # Configuración del bot
+│   ├── index.ts                 # Punto de entrada principal
+│   ├── config.ts                # Configuración del bot
 │   ├── types/
-│   │   └── Command.ts     # Interfaces compartidas
+│   │   └── Command.ts           # Interfaces compartidas
 │   ├── utils/
-│   │   ├── audioPlayer.ts # Utilidades para reproducción de audio
-│   │   ├── audioManager.ts # Gestión de archivos de audio
-│   │   └── logger.ts      # Sistema de registro
+│   │   ├── audioPlayer.ts       # Utilidades para reproducción de audio
+│   │   ├── audioManager.ts      # Gestión de archivos de audio
+│   │   ├── commandManager.ts    # Gestión de comandos
+│   │   └── logger.ts            # Sistema de registro
 │   ├── assets/
-│   │   └── audio/         # Archivos de audio
+│   │   └── audio/               # Archivos de audio
 │   └── commands/
-│       ├── ping.ts        # Comando de ping
-│       ├── play.ts        # Comando para reproducir audio
-│       └── songs.ts       # Comando para listar canciones
-├── dist/                  # Código compilado
-├── .env                   # Variables de entorno
-├── package.json          # Dependencias y scripts
-├── tsconfig.json         # Configuración de TypeScript
-├── .eslintrc.json       # Configuración de ESLint
-├── .prettierrc          # Configuración de Prettier
-└── README.md            # Este archivo
+│       ├── ping.ts              # Comando de ping
+│       ├── play.ts              # Comando para reproducir audio
+│       ├── songs.ts             # Comando para listar canciones
+│       └── help.ts              # Comando de ayuda
+├── dist/                        # Código compilado
+├── .env                         # Variables de entorno
+├── package.json                 # Dependencias y scripts
+├── tsconfig.json                # Configuración de TypeScript
+├── .eslintrc.json               # Configuración de ESLint
+├── .prettierrc                  # Configuración de Prettier
+├── .vscode/                     # Configuración de VSCode
+│   ├── extensions.json          # Extensiones recomendadas
+│   └── launch.json              # Configuración de lanzamiento
+├── README.md                    # Este archivo
+└── COMANDOS.md                  # Documentación de comandos
 ```
 
 ## Scripts Disponibles
@@ -96,16 +112,7 @@ npm run build
 npm start
 ```
 
-## Comandos Disponibles
-
-- `~ping`: Responde con "Pong!" y muestra la latencia del bot
-- `~songs`: Muestra la lista numerada de canciones disponibles para reproducir
-- `~play <número/nombre>`: Reproduce un archivo de audio en el canal de voz
-  - Se puede usar el número de la lista (ejemplo: `~play 1`)
-  - Se puede usar el nombre del archivo (ejemplo: `~play audio.mp3`)
-  - Se puede abreviar como `~p` (ejemplo: `~p 1` o `~p audio.mp3`)
-
-## Reproducción de Audio
+## Assets de Audio
 
 Para usar el comando de reproducción de audio:
 
@@ -114,13 +121,6 @@ Para usar el comando de reproducción de audio:
 3. El usuario debe estar en un canal de voz
 4. Usa el comando `~songs` para ver la lista de canciones disponibles
 5. Usa `~play` o `~p` seguido del número o nombre del archivo
-
-## Sistema de Logs
-
-El bot mantiene un registro de todas las acciones en:
-
-- Terminal: Muestra los comandos ejecutados con colores para mejor visibilidad
-- Archivo `history.log`: Guarda un historial completo de todos los comandos ejecutados
 
 ## Solución de Problemas
 
@@ -151,3 +151,11 @@ Las contribuciones son bienvenidas. Por favor, abre un issue primero para discut
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## Extensiones Recomendadas
+
+Para mejorar la experiencia de desarrollo, se recomienda instalar las extensiones listadas en el archivo `.vscode/extensions.json`.
+
+## Comandos
+
+Para ver la lista completa de comandos disponibles, consulta el archivo [COMANDOS.md](./src/commands/COMANDOS.md).
