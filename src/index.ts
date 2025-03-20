@@ -3,6 +3,7 @@ import config from './config';
 import pingCommand from './commands/ping';
 import playCommand from './commands/play';
 import { Command } from './types/Command';
+import { CommandLogger } from './utils/logger';
 
 class KotoriClient extends Client {
   public commands: Collection<string, Command>;
@@ -25,7 +26,7 @@ client.commands.set(pingCommand.name, pingCommand);
 client.commands.set(playCommand.name, playCommand);
 
 client.once('ready', (): void => {
-  console.log(`Bot está listo! Conectado como ${client.user?.tag}`);
+  CommandLogger.logInfo(`Bot está listo! Conectado como ${client.user?.tag}`);
 });
 
 client.on('messageCreate', async (message: Message): Promise<void> => {
@@ -39,9 +40,12 @@ client.on('messageCreate', async (message: Message): Promise<void> => {
   if (!commandName || !client.commands.has(commandName)) return;
 
   try {
+    CommandLogger.logCommand(message, commandName, args);
     await client.commands.get(commandName)?.execute(message, args);
   } catch (error) {
-    console.error(error);
+    if (error instanceof Error) {
+      CommandLogger.logError(error);
+    }
     await message.reply('Hubo un error al ejecutar ese comando!');
   }
 });
