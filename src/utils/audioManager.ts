@@ -30,3 +30,11 @@ export class AudioManager {
     return songs.includes(songName);
   }
 }
+
+export const getAvailableSongs = (): string[] => {
+  const audioDir = path.join(__dirname, '../assets/audio');
+  if (!fs.existsSync(audioDir)) {
+    return [];
+  }
+  return fs.readdirSync(audioDir).filter((file) => file.endsWith('.mp3'));
+};

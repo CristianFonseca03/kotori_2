@@ -10,9 +10,8 @@ class PlayCommand extends BaseCommand {
   description = 'Reproduce un archivo de audio en el canal de voz';
 
   async execute(message: Message, args: string[]): Promise<void> {
-    if (!args.length) {
-      const response = `Por favor, especifica el nombre del archivo de audio o su número. Usa \`${config.prefix}songs\` para ver la lista de canciones disponibles.`;
-      await this.logAndReply(message, response);
+    if (!args || args.length === 0) {
+      await message.reply('Por favor, proporciona un archivo de audio para reproducir.');
       return;
     }
 
