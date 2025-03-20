@@ -20,7 +20,7 @@
     "release:patch": "npm version patch && git push --follow-tags",
     "release:minor": "npm version minor && git push --follow-tags",
     "release:major": "npm version major && git push --follow-tags",
-    "deploy:docs": "gh-pages -d docs"
+    "deploy:docs": "npm run test:coverage || true && gh-pages -d docs"
   },
   "notes": {
     "check": "El formato se ha eliminado temporalmente de 'check' debido a problemas de permisos. Para resolverlo: 1) Instalar prettier globalmente (npm install -g prettier@3.2.5), 2) Ejecutar: chmod +x ./node_modules/prettier/bin-prettier.js, 3) Cambiar el script por: npx prettier --write \"src/**/*.ts\""
