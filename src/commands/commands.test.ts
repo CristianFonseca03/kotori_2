@@ -5,8 +5,8 @@ import SongsCommand from './songs';
 import { Message, GuildMember, VoiceChannel } from 'discord.js';
 import { createMockMessage } from '../utils/testUtils';
 import { AudioManager } from '../utils/audioManager';
-import { AudioPlayerManager } from '../utils/audioPlayer';
 import { CommandManager } from '../utils/commandManager';
+import { AudioPlayerManager } from '../utils/audioPlayer';
 
 jest.mock('@discordjs/voice', () => ({
   joinVoiceChannel: jest.fn(() => ({
@@ -54,8 +54,11 @@ jest.mock('../utils/audioPlayer', () => {
   };
 });
 
-// Función auxiliar para inicializar el entorno de pruebas
-const setupTestEnvironment = () => {
+// Ajustando el tipo de retorno en setupTestEnvironment
+const setupTestEnvironment = (): {
+  mockMessage: Partial<Message>;
+  commandManager: CommandManager;
+} => {
   const mockMessage = createMockMessage();
   const commandManager = new CommandManager();
 
