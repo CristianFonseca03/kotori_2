@@ -1,19 +1,18 @@
 import { Message } from 'discord.js';
-import { Command } from '../types/Command';
+import { BaseCommand } from '../types/BaseCommand';
 import { AudioPlayerManager } from '../utils/audioPlayer';
 import { AudioManager } from '../utils/audioManager';
-import { CommandLogger } from '../utils/logger';
 
-const playCommand: Command = {
-  name: 'play',
-  aliases: ['p'],
-  description: 'Reproduce un archivo de audio en el canal de voz',
-  execute: async (message: Message, args: string[]): Promise<void> => {
+class PlayCommand extends BaseCommand {
+  name = 'play';
+  aliases = ['p'];
+  description = 'Reproduce un archivo de audio en el canal de voz';
+
+  async execute(message: Message, args: string[]): Promise<void> {
     if (args.length === 0) {
       const response =
         'Por favor, especifica el nombre del archivo de audio o su número. Usa `~songs` para ver la lista de canciones disponibles.';
-      await message.reply(response);
-      CommandLogger.logResponse(message, response);
+      await this.logAndReply(message, response);
       return;
     }
 
@@ -31,14 +30,14 @@ const playCommand: Command = {
 
     if (!AudioManager.songExists(audioFile)) {
       const response = `La canción "${input}" no existe. Usa \`~songs\` para ver la lista de canciones disponibles.`;
-      await message.reply(response);
-      CommandLogger.logResponse(message, response);
+      await this.logAndReply(message, response);
       return;
     }
 
     await AudioPlayerManager.play(message, audioFile);
-    CommandLogger.logResponse(message, `Reproduciendo: ${audioFile}`);
-  },
-};
+    const response = `Reproduciendo: ${audioFile}`;
+    await this.logAndReply(message, response);
+  }
+}
 
-export default playCommand;
+export default new PlayCommand();

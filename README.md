@@ -64,6 +64,7 @@ kotori2/
 │   ├── config.ts                # Configuración del bot
 │   ├── types/
 │   │   └── Command.ts           # Interfaces compartidas
+│   │   └── BaseCommand.ts       # Clase base para todos los comandos
 │   ├── utils/
 │   │   ├── audioPlayer.ts       # Utilidades para reproducción de audio
 │   │   ├── audioManager.ts      # Gestión de archivos de audio
@@ -159,6 +160,17 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 Para mejorar la experiencia de desarrollo, se recomienda instalar las extensiones listadas en el archivo `.vscode/extensions.json`.
 
-## Comandos
+## Estructura de Comandos
+
+Todos los comandos heredan de la clase `BaseCommand`, que proporciona un método común para manejar el logging y las respuestas.
+
+### BaseCommand
+
+- **Propósito**: Centralizar el manejo de logs y respuestas.
+- **Método Principal**: `logAndReply(message: Message, response: string)`
+
+### Comandos Disponibles
 
 Para ver la lista completa de comandos disponibles, consulta el archivo [COMANDOS.md](./src/commands/COMANDOS.md).
+
+Cada comando implementa su lógica específica en el método `execute`, pero utiliza `logAndReply` para enviar respuestas y registrar logs.
