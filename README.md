@@ -106,6 +106,11 @@ kotori2/
 - `npm start`: Inicia el bot en modo producción
 - `npm run lint`: Ejecuta el linter
 - `npm run format`: Formatea el código con Prettier
+- `npm run check`: Ejecuta todas las verificaciones del proyecto:
+  - Ejecuta el linter
+  - Formatea el código
+  - Compila el proyecto
+  - Útil para verificar que todo está correcto antes de hacer commit o deploy
 
 ## Uso
 
@@ -123,6 +128,12 @@ npm run build
 
 ```bash
 npm start
+```
+
+Para verificar el estado del proyecto:
+
+```bash
+npm run check
 ```
 
 ## Assets de Audio
@@ -178,3 +189,26 @@ Todos los comandos heredan de la clase `BaseCommand`, que proporciona un método
 Para ver la lista completa de comandos disponibles, consulta el archivo [COMANDOS.md](./src/commands/COMANDOS.md).
 
 Cada comando implementa su lógica específica en el método `execute`, pero utiliza `logAndReply` para enviar respuestas y registrar logs.
+
+## Política de Versionado
+
+Este proyecto sigue el [Versionado Semántico](https://semver.org/lang/es/):
+
+- **MAJOR (X.0.0)**: Cambios incompatibles con versiones anteriores
+- **MINOR (0.X.0)**: Nuevas funcionalidades que mantienen compatibilidad
+- **PATCH (0.0.X)**: Correcciones de errores que mantienen compatibilidad
+
+## Despliegue
+
+Para desplegar el bot en un entorno de producción:
+
+1. Asegúrate de tener Node.js instalado (versión >=22.14.0)
+2. Clona el repositorio
+3. Instala las dependencias: `npm install --production`
+4. Configura las variables de entorno en un archivo `.env`:
+   ```
+   DISCORD_TOKEN=tu_token_aquí
+   COMMAND_PREFIX=tu_prefijo_aquí  # Por defecto es ~
+   ```
+5. Compila el proyecto: `npm run build`
+6. Inicia el bot: `npm start`
