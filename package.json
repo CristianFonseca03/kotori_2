@@ -2,20 +2,29 @@
   "name": "kotori2",
   "version": "1.0.0",
   "description": "Un bot de Discord simple con comando ping",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "engines": {
     "node": ">=22.14.0",
     "npm": ">=10.2.4"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
   }
 } 
