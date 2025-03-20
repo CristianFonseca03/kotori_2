@@ -1,9 +1,7 @@
 import { Message } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
-// TODO: quitar esta linea de alguna forma
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export class CommandLogger {
   private static logFile = path.join(process.cwd(), 'history.log');
@@ -19,8 +17,8 @@ export class CommandLogger {
 
     // Formato para la terminal
     const terminalEntry = [
-      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.magenta(username)} ${chalk.default.yellow(commandName)}`,
-      args.length > 0 ? `${chalk.default.magenta(args.join(' '))}` : '',
+      `${chalk.dim(`[${timestamp}]`)} ${chalk.magenta(username)} ${chalk.yellow(commandName)}`,
+      args.length > 0 ? `${chalk.magenta(args.join(' '))}` : '',
     ]
       .filter(Boolean)
       .join(' ');
@@ -38,7 +36,7 @@ export class CommandLogger {
 
     // Formato para la terminal
     const terminalEntry = [
-      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.green(`Respuesta a ${username}:`)} ${chalk.default.white(response)}`,
+      `${chalk.dim(`[${timestamp}]`)} ${chalk.green(`Respuesta a ${username}:`)} ${chalk.white(response)}`,
     ].join(' ');
 
     console.log(terminalEntry);
@@ -52,9 +50,7 @@ export class CommandLogger {
     fs.appendFileSync(this.logFile, errorMessage);
 
     // Log en terminal
-    console.log(
-      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.bgRed.black('ERROR:')} ${error.message}`
-    );
+    console.log(`${chalk.dim(`[${timestamp}]`)} ${chalk.bgRed.black('ERROR:')} ${error.message}`);
   }
 
   public static logInfo(message: string): void {
@@ -65,15 +61,11 @@ export class CommandLogger {
     fs.appendFileSync(this.logFile, infoMessage);
 
     // Log en terminal
-    console.log(
-      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.bgBlue.black('INFO:')} ${message}`
-    );
+    console.log(`${chalk.dim(`[${timestamp}]`)} ${chalk.bgBlue.black('INFO:')} ${message}`);
   }
 
   public static async logPrefix(prefix: string): Promise<void> {
     const timestamp = new Date().toLocaleString();
-    console.log(
-      `${chalk.default.dim(`[${timestamp}]`)} ${chalk.default.bgGreen.black(`Prefijo: ${prefix}`)}`
-    );
+    console.log(`${chalk.dim(`[${timestamp}]`)} ${chalk.bgGreen.black(`Prefijo: ${prefix}`)}`);
   }
 }
