@@ -1,27 +1,11 @@
 import dotenv from 'dotenv';
+import { Config } from './types/Config';
 
 dotenv.config();
 
-interface Config {
-  token: string;
-  prefix: string;
-  commands: {
-    ping: {
-      name: string;
-      description: string;
-    };
-  };
-}
-
 const config: Config = {
   token: process.env.DISCORD_TOKEN || '',
-  prefix: '~',
-  commands: {
-    ping: {
-      name: 'ping',
-      description: 'Responde con Pong! y muestra la latencia del bot',
-    },
-  },
+  prefix: process.env.COMMAND_PREFIX || '~',
 };
 
 export default config;

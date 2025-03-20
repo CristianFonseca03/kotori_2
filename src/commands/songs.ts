@@ -1,10 +1,12 @@
 import { Message } from 'discord.js';
 import { BaseCommand } from '../types/BaseCommand';
 import { AudioManager } from '../utils/audioManager';
+import config from '../config';
 
 class SongsCommand extends BaseCommand {
   name = 'songs';
-  description = 'Muestra la lista de canciones disponibles para reproducir';
+  aliases = ['songlist'];
+  description = 'Muestra la lista de canciones disponibles';
 
   async execute(message: Message): Promise<void> {
     const songs = AudioManager.getAvailableSongs();
@@ -15,9 +17,8 @@ class SongsCommand extends BaseCommand {
       return;
     }
 
-    const songList = songs.map((song, index) => `${index + 1}. ${song}`).join('\n');
-    const response = `🎵 **Canciones disponibles:**\n\`\`\`\n${songList}\n\`\`\`\nPara reproducir una canción, usa \`~play <nombre del archivo>\``;
-
+    const songList = songs.map((song: string, index: number) => `${index + 1}. ${song}`).join('\n');
+    const response = `🎵 **Canciones disponibles:**\n\`\`\`\n${songList}\n\`\`\`\nPara reproducir una canción, usa \`${config.prefix}play <nombre del archivo>\``;
     await this.logAndReply(message, response);
   }
 }

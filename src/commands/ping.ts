@@ -3,14 +3,12 @@ import { BaseCommand } from '../types/BaseCommand';
 
 class PingCommand extends BaseCommand {
   name = 'ping';
-  description = 'Responde con Pong! y muestra la latencia del bot';
+  description = 'Responde con "Pong!" y muestra la latencia del bot';
 
   async execute(message: Message): Promise<void> {
-    const startTime = Date.now();
-    const endTime = Date.now();
-    const latency = endTime - startTime;
-    const response = `Pong! 🏓 Latencia: ${latency}ms`;
-    await this.logAndReply(message, response);
+    const sent = await this.logAndReply(message, 'Ping...');
+    const latency = sent.createdTimestamp - message.createdTimestamp;
+    await this.logAndReply(message, `Pong! 🏓\nLatencia: ${latency}ms`);
   }
 }
 

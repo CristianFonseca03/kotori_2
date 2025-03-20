@@ -53,7 +53,15 @@ Este es un bot de Discord básico creado con Node.js, TypeScript y Discord.js qu
 
    ```
    DISCORD_TOKEN=tu_token_aquí
+   COMMAND_PREFIX=~  # Prefijo por defecto para los comandos
    ```
+
+   > **Nota sobre el prefijo de comandos:**
+   >
+   > - El prefijo por defecto es `~` (tilde)
+   > - Puedes cambiarlo modificando la variable `COMMAND_PREFIX` en el archivo `.env`
+   > - Si no se especifica en el `.env`, se usará el prefijo por defecto `~`
+   > - Ejemplo: `COMMAND_PREFIX=!` para usar `!` como prefijo
 
 ## Estructura del Proyecto
 
@@ -63,8 +71,9 @@ kotori2/
 │   ├── index.ts                 # Punto de entrada principal
 │   ├── config.ts                # Configuración del bot
 │   ├── types/
-│   │   └── Command.ts           # Interfaces compartidas
-│   │   └── BaseCommand.ts       # Clase base para todos los comandos
+│   │   ├── Command.ts           # Interfaces compartidas
+│   │   ├── BaseCommand.ts       # Clase base para todos los comandos
+│   │   └── PlayerData.ts        # Interfaz para datos del reproductor
 │   ├── utils/
 │   │   ├── audioPlayer.ts       # Utilidades para reproducción de audio
 │   │   ├── audioManager.ts      # Gestión de archivos de audio
@@ -123,34 +132,29 @@ Para usar el comando de reproducción de audio:
 1. Asegúrate de que el archivo de audio esté en la carpeta `src/assets/audio/`
 2. El archivo debe estar en un formato compatible (mp3, wav, ogg)
 3. El usuario debe estar en un canal de voz
-4. Usa el comando `~songs` para ver la lista de canciones disponibles
-5. Usa `~play` o `~p` seguido del número o nombre del archivo
+4. Usa el comando `songs` para ver la lista de canciones disponibles
+5. Usa `play` o `p` seguido del número o nombre del archivo
+
+El prefijo de los comandos se puede configurar en el archivo `.env` usando la variable `COMMAND_PREFIX`. Por defecto es `~`.
 
 ## Solución de Problemas
 
-Si encuentras errores relacionados con la reproducción de audio:
+Si encuentras algún problema, asegúrate de:
 
-1. Verifica que FFmpeg está instalado correctamente:
-
-```bash
-ffmpeg -version
-```
-
-2. Verifica que las dependencias del sistema están instaladas:
-
-```bash
-sudo apt install -y ffmpeg libopus-dev libsodium-dev
-```
-
-3. Asegúrate de que el archivo de audio existe y tiene los permisos correctos:
-
-```bash
-ls -l src/assets/audio/
-```
+1. Tener todas las dependencias del sistema instaladas
+2. Tener el token de Discord correctamente configurado en el archivo `.env`
+3. Tener los permisos necesarios en el servidor de Discord
+4. Tener los archivos de audio en el formato correcto
 
 ## Contribuir
 
-Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+Las contribuciones son bienvenidas. Por favor, asegúrate de:
+
+1. Hacer fork del repositorio
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
 
 ## Licencia
 

@@ -1,13 +1,16 @@
 import { Message } from 'discord.js';
+import { Command } from './Command';
 import { CommandLogger } from '../utils/logger';
 
-export abstract class BaseCommand {
+export abstract class BaseCommand implements Command {
   abstract name: string;
   abstract description: string;
-  abstract execute(message: Message, args: string[]): Promise<void>;
+  aliases?: string[];
 
-  protected async logAndReply(message: Message, response: string): Promise<void> {
+  abstract execute(message: Message, args?: string[]): Promise<void>;
+
+  protected async logAndReply(message: Message, response: string): Promise<Message> {
     CommandLogger.logResponse(message, response);
-    await message.reply(response);
+    return await message.reply(response);
   }
 }

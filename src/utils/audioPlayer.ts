@@ -5,17 +5,12 @@ import {
   AudioPlayerStatus,
   VoiceConnectionStatus,
   entersState,
-  VoiceConnection,
   AudioPlayer,
   DiscordGatewayAdapterCreator,
 } from '@discordjs/voice';
 import { Message, GuildMember, TextChannel } from 'discord.js';
 import { join } from 'path';
-
-interface PlayerData {
-  connection: VoiceConnection;
-  player: AudioPlayer;
-}
+import { PlayerData } from '../types/PlayerData';
 
 export class AudioPlayerManager {
   private static players: Map<string, PlayerData> = new Map();
@@ -87,3 +82,5 @@ export class AudioPlayerManager {
     }
   }
 }
+
+export { AudioPlayer };

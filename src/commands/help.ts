@@ -1,45 +1,45 @@
 import { Message } from 'discord.js';
 import { BaseCommand } from '../types/BaseCommand';
 import { CommandManager } from '../utils/commandManager';
+import config from '../config';
 
 class HelpCommand extends BaseCommand {
   name = 'help';
-  aliases = ['h', 'comandos'];
+  aliases = ['h'];
   description =
     'Muestra la lista de comandos disponibles o información detallada de un comando específico';
 
   async execute(message: Message, args: string[]): Promise<void> {
-    const commandManager = CommandManager.getInstance();
+    const commandName = args[0]?.toLowerCase();
+    const commands = CommandManager.getInstance().getAllCommands();
 
-    // Si se proporciona un comando específico
-    if (args.length > 0) {
-      const commandName = args[0].toLowerCase();
-      const command = commandManager.getCommand(commandName);
+    if (commandName) {
+      const command = commands.find(
+        (cmd) =>
+          cmd.name.toLowerCase() === commandName ||
+          cmd.aliases?.some((alias) => alias.toLowerCase() === commandName)
+      );
 
       if (!command) {
-        const response = `❌ El comando "${commandName}" no existe. Usa \`~help\` para ver la lista de comandos disponibles.`;
+        const response = `❌ El comando "${commandName}" no existe. Usa \`${config.prefix}help\` para ver la lista de comandos disponibles.`;
         await this.logAndReply(message, response);
         return;
       }
 
-      const aliases = command.aliases ? `\n**Aliases:** ${command.aliases.join(', ')}` : '';
-      const response = `📖 **Información del comando ${command.name}:**\n\n**Descripción:** ${command.description}${aliases}`;
+      const aliasesText = command.aliases?.length
+        ? `\n**Aliases:** ${command.aliases.map((alias) => `\`${config.prefix}${alias}\``).join(', ')}`
+        : '';
 
+      const response = `📚 **Comando:** \`${config.prefix}${command.name}\`${aliasesText}\n\n**Descripción:** ${command.description}`;
       await this.logAndReply(message, response);
       return;
     }
 
-    // Si no se proporciona comando específico, mostrar lista completa
-    const commands = commandManager.getAllCommands();
     const commandList = commands
-      .map((cmd) => {
-        const aliases = cmd.aliases ? ` _(Aliases: ${cmd.aliases.join(', ')})_` : '';
-        return `🔹 **${cmd.name}**${aliases}: ${cmd.description}`;
-      })
+      .map((cmd) => `\`${config.prefix}${cmd.name}\` - ${cmd.description}`)
       .join('\n');
 
-    const response = `📚 **Comandos disponibles:**\n\n${commandList}\n\nPara más información sobre un comando específico, usa \`~help <comando>\``;
-
+    const response = `📚 **Comandos disponibles:**\n\n${commandList}\n\nPara más información sobre un comando específico, usa \`${config.prefix}help <comando>\``;
     await this.logAndReply(message, response);
   }
 }
