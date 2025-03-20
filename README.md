@@ -55,12 +55,15 @@ kotori2/
 │   ├── types/
 │   │   └── Command.ts     # Interfaces compartidas
 │   ├── utils/
-│   │   └── audioPlayer.ts # Utilidades para reproducción de audio
+│   │   ├── audioPlayer.ts # Utilidades para reproducción de audio
+│   │   ├── audioManager.ts # Gestión de archivos de audio
+│   │   └── logger.ts      # Sistema de registro
 │   ├── assets/
 │   │   └── audio/         # Archivos de audio
 │   └── commands/
 │       ├── ping.ts        # Comando de ping
-│       └── play.ts        # Comando para reproducir audio
+│       ├── play.ts        # Comando para reproducir audio
+│       └── songs.ts       # Comando para listar canciones
 ├── dist/                  # Código compilado
 ├── .env                   # Variables de entorno
 ├── package.json          # Dependencias y scripts
@@ -96,16 +99,28 @@ npm start
 ## Comandos Disponibles
 
 - `~ping`: Responde con "Pong!" y muestra la latencia del bot
-- `~play <archivo>`: Reproduce un archivo de audio en el canal de voz (ejemplo: `~play audio.mp3`)
+- `~songs`: Muestra la lista numerada de canciones disponibles para reproducir
+- `~play <número/nombre>`: Reproduce un archivo de audio en el canal de voz
+  - Se puede usar el número de la lista (ejemplo: `~play 1`)
+  - Se puede usar el nombre del archivo (ejemplo: `~play audio.mp3`)
+  - Se puede abreviar como `~p` (ejemplo: `~p 1` o `~p audio.mp3`)
 
 ## Reproducción de Audio
 
 Para usar el comando de reproducción de audio:
 
 1. Asegúrate de que el archivo de audio esté en la carpeta `src/assets/audio/`
-2. El archivo debe estar en un formato compatible (mp3, wav, etc.)
+2. El archivo debe estar en un formato compatible (mp3, wav, ogg)
 3. El usuario debe estar en un canal de voz
-4. Usa el comando `~play <nombre-del-archivo>`
+4. Usa el comando `~songs` para ver la lista de canciones disponibles
+5. Usa `~play` o `~p` seguido del número o nombre del archivo
+
+## Sistema de Logs
+
+El bot mantiene un registro de todas las acciones en:
+
+- Terminal: Muestra los comandos ejecutados con colores para mejor visibilidad
+- Archivo `history.log`: Guarda un historial completo de todos los comandos ejecutados
 
 ## Solución de Problemas
 
