@@ -2,6 +2,10 @@
 
 Este es un bot de Discord básico creado con Node.js, TypeScript y Discord.js que implementa comandos de ping y reproducción de audio.
 
+## Mejoras Planificadas
+
+Para conocer las mejoras planificadas y oportunidades de desarrollo, consulta el archivo [Revisión Versión 1.0.0](./review_prompts/v1.0.0.md).
+
 ## Requisitos Previos
 
 - Ubuntu (versión 20.04 o superior)
