@@ -1,7 +1,9 @@
 import { Message } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
-import chalk from 'chalk';
+// TODO: quitar esta linea de alguna forma
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const chalk = require('chalk');
 
 export class CommandLogger {
   private static logFile = path.join(process.cwd(), 'history.log');
