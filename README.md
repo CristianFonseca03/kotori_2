@@ -13,7 +13,7 @@ Este es un bot de Discord básico creado con Node.js y Discord.js que implementa
 1. Clona este repositorio:
 ```bash
 git clone [URL_DEL_REPOSITORIO]
-cd discord-bot
+cd kotori_2
 ```
 
 2. Instala las dependencias:
