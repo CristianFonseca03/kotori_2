@@ -39,6 +39,24 @@ export class CommandLogger {
     console.log(terminalEntry);
   }
 
+  public static logResponse(message: Message, response: string): void {
+    const timestamp = new Date().toLocaleString();
+    const username = message.author.tag;
+
+    // Formato para el archivo de log
+    const logEntry = `[${timestamp}] Respuesta a ${username}: ${response}\n`;
+    fs.appendFileSync(this.logFile, logEntry);
+
+    // Formato para la terminal
+    const terminalEntry = [
+      `${this.colors.dim}[${timestamp}]${this.colors.reset}`,
+      `${this.colors.green}Respuesta a ${username}:${this.colors.reset}`,
+      `${this.colors.white}${response}${this.colors.reset}`,
+    ].join(' ');
+
+    console.log(terminalEntry);
+  }
+
   public static logError(error: Error): void {
     const timestamp = new Date().toLocaleString();
     const errorMessage = `[${timestamp}] ERROR: ${error.message}\n`;

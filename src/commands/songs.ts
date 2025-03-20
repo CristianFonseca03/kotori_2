@@ -10,7 +10,9 @@ const songsCommand: Command = {
     const songs = AudioManager.getAvailableSongs();
 
     if (songs.length === 0) {
-      await message.reply('No hay canciones disponibles en el momento.');
+      const response = 'No hay canciones disponibles en el momento.';
+      await message.reply(response);
+      CommandLogger.logResponse(message, response);
       return;
     }
 
@@ -18,7 +20,7 @@ const songsCommand: Command = {
     const response = `🎵 **Canciones disponibles:**\n\`\`\`\n${songList}\n\`\`\`\nPara reproducir una canción, usa \`~play <nombre del archivo>\``;
 
     await message.reply(response);
-    CommandLogger.logInfo(`${message.author.tag} solicitó la lista de canciones`);
+    CommandLogger.logResponse(message, `Lista de ${songs.length} canciones disponibles`);
   },
 };
 

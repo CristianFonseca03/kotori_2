@@ -10,9 +10,10 @@ const playCommand: Command = {
   description: 'Reproduce un archivo de audio en el canal de voz',
   execute: async (message: Message, args: string[]): Promise<void> => {
     if (args.length === 0) {
-      await message.reply(
-        'Por favor, especifica el nombre del archivo de audio o su número. Usa `~songs` para ver la lista de canciones disponibles.'
-      );
+      const response =
+        'Por favor, especifica el nombre del archivo de audio o su número. Usa `~songs` para ver la lista de canciones disponibles.';
+      await message.reply(response);
+      CommandLogger.logResponse(message, response);
       return;
     }
 
@@ -29,14 +30,14 @@ const playCommand: Command = {
     }
 
     if (!AudioManager.songExists(audioFile)) {
-      await message.reply(
-        `La canción "${input}" no existe. Usa \`~songs\` para ver la lista de canciones disponibles.`
-      );
+      const response = `La canción "${input}" no existe. Usa \`~songs\` para ver la lista de canciones disponibles.`;
+      await message.reply(response);
+      CommandLogger.logResponse(message, response);
       return;
     }
 
     await AudioPlayerManager.play(message, audioFile);
-    CommandLogger.logCommand(message, 'play', [audioFile]);
+    CommandLogger.logResponse(message, `Reproduciendo: ${audioFile}`);
   },
 };
 
