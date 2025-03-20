@@ -1,14 +1,13 @@
-import { Client, GatewayIntentBits, Collection, Message } from 'discord.js';
+import { Client, GatewayIntentBits, Message } from 'discord.js';
 import config from './config';
 import pingCommand from './commands/ping';
 import playCommand from './commands/play';
 import songsCommand from './commands/songs';
-import { Command } from './types/Command';
+import helpCommand from './commands/help';
+import { CommandManager } from './utils/commandManager';
 import { CommandLogger } from './utils/logger';
 
 class KotoriClient extends Client {
-  public commands: Collection<string, Command>;
-
   constructor() {
     super({
       intents: [
@@ -18,23 +17,17 @@ class KotoriClient extends Client {
         GatewayIntentBits.GuildVoiceStates,
       ],
     });
-    this.commands = new Collection<string, Command>();
-  }
-
-  public registerCommand(command: Command): void {
-    this.commands.set(command.name, command);
-    if (command.aliases) {
-      command.aliases.forEach((alias) => {
-        this.commands.set(alias, command);
-      });
-    }
   }
 }
 
 const client = new KotoriClient();
-client.registerCommand(pingCommand);
-client.registerCommand(playCommand);
-client.registerCommand(songsCommand);
+const commandManager = CommandManager.getInstance();
+
+// Registrar comandos
+commandManager.registerCommand(pingCommand);
+commandManager.registerCommand(playCommand);
+commandManager.registerCommand(songsCommand);
+commandManager.registerCommand(helpCommand);
 
 client.once('ready', (): void => {
   CommandLogger.logInfo(`Bot está listo! Conectado como ${client.user?.tag}`);
@@ -48,10 +41,10 @@ client.on('messageCreate', async (message: Message): Promise<void> => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/);
   const commandName = args.shift()?.toLowerCase();
 
-  if (!commandName || !client.commands.has(commandName)) return;
+  if (!commandName || !commandManager.hasCommand(commandName)) return;
 
   try {
-    const command = client.commands.get(commandName);
+    const command = commandManager.getCommand(commandName);
     if (command) {
       CommandLogger.logCommand(message, command.name, args);
       await command.execute(message, args);
