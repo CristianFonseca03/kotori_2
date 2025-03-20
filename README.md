@@ -1,5 +1,8 @@
 # Kotori2 - Bot de Discord
 
+[![Cobertura de Pruebas](https://img.shields.io/badge/cobertura-70%25-brightgreen.svg)](https://usuario.github.io/kotori_2_nodejs/coverage/)
+[![Pruebas](https://img.shields.io/badge/pruebas-jest-blue.svg)](https://jestjs.io/)
+
 Este es un bot de Discord básico creado con Node.js, TypeScript y Discord.js que implementa comandos de ping y reproducción de audio.
 
 ## Mejoras Planificadas
@@ -112,9 +115,94 @@ kotori2/
 - `npm run format`: Formatea el código con Prettier
 - `npm run check`: Ejecuta todas las verificaciones del proyecto:
   - Ejecuta el linter
-  - Formatea el código
   - Compila el proyecto
+  - Ejecuta las pruebas
   - Útil para verificar que todo está correcto antes de hacer commit o deploy
+- `npm test`: Ejecuta las pruebas unitarias con Jest
+- `npm run test:coverage`: Ejecuta las pruebas y genera informes de cobertura
+- `npm run test:watch`: Ejecuta las pruebas en modo watch
+- `npm run deploy:coverage`: Genera y copia los informes de cobertura para GitHub Pages
+- `npm run deploy`: Prepara el proyecto para despliegue en GitHub Pages
+
+## Pruebas y Cobertura
+
+El proyecto utiliza Jest como framework de pruebas. Las pruebas se encuentran en archivos con sufijo `.test.ts` junto a los archivos de implementación.
+
+### Ejecución de pruebas
+
+```bash
+# Ejecutar todas las pruebas
+npm test
+
+# Ejecutar pruebas con generación de informes de cobertura
+npm run test:coverage
+
+# Ejecutar pruebas en modo watch (útil durante el desarrollo)
+npm run test:watch
+```
+
+### Cobertura de pruebas
+
+El proyecto tiene establecido un objetivo mínimo de cobertura del 70% para:
+
+- Líneas de código
+- Funciones
+- Ramas
+- Declaraciones
+
+Puedes ver los informes de cobertura actualizados en:
+
+- Local: `docs/coverage/index.html` (después de ejecutar `npm run test:coverage`)
+- En línea: [https://usuario.github.io/kotori_2_nodejs/coverage/](https://usuario.github.io/kotori_2_nodejs/coverage/)
+
+## Despliegue en GitHub Pages
+
+El proyecto está configurado para desplegar automáticamente la documentación y los informes de cobertura en GitHub Pages.
+
+### Pasos para desplegar:
+
+1. Ejecuta las pruebas y genera informes de cobertura:
+
+   ```bash
+   npm run test:coverage
+   ```
+
+2. Prepara los archivos para GitHub Pages:
+
+   ```bash
+   npm run deploy:coverage
+   ```
+
+3. Sube los cambios a la rama principal en GitHub:
+
+   ```bash
+   git add .
+   git commit -m "Actualizar informes de cobertura"
+   git push
+   ```
+
+4. Configura GitHub Pages para usar la carpeta `/docs`:
+   - Ve a la configuración del repositorio en GitHub
+   - Navega a la sección "Pages"
+   - Selecciona la rama principal y la carpeta `/docs` como origen
+
+## Despliegue de Documentación
+
+El proyecto está configurado para desplegar la documentación en GitHub Pages utilizando la carpeta `docs/` como base.
+
+### Pasos para desplegar:
+
+1. Asegúrate de que los archivos de documentación estén actualizados en la carpeta `docs/`.
+2. Ejecuta el siguiente comando para desplegar la documentación:
+   ```bash
+   npm run deploy:docs
+   ```
+3. Configura GitHub Pages para usar la carpeta `docs/` como origen:
+   - Ve a la configuración del repositorio en GitHub.
+   - Navega a la sección "Pages".
+   - Selecciona la rama principal y la carpeta `/docs` como origen.
+
+Una vez completado, la documentación estará disponible en la URL proporcionada por GitHub Pages.
 
 ## Uso
 
@@ -170,6 +258,13 @@ Las contribuciones son bienvenidas. Por favor, asegúrate de:
 3. Commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abrir un Pull Request
+
+### Directrices para contribuciones:
+
+- Seguir el estilo de código establecido
+- Añadir pruebas para cualquier nueva funcionalidad
+- Mantener o aumentar el porcentaje de cobertura de pruebas
+- Documentar el código y actualizar el README si es necesario
 
 ## Licencia
 

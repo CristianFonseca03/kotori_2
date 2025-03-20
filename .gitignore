@@ -9,4 +9,7 @@ package-lock.json
 *.tsbuildinfo
 src/assets/audio/*
 !src/assets/audio/.gitkeep
-history.log 
+history.log
+
+# Ignorar la carpeta de cobertura generada por las pruebas
+docs/coverage/
