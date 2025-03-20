@@ -7,13 +7,16 @@
       "name": "Debug Bot",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/src/index.ts",
-      "runtimeArgs": ["-r", "ts-node/register"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
       "console": "integratedTerminal",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"],
       "sourceMaps": true,
       "env": {
         "NODE_ENV": "development"
-      }
+      },
+      "restart": true,
+      "autoAttachChildProcesses": true
     },
     {
       "type": "node",
