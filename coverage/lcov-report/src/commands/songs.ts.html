@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,57 +90,57 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Message } from 'discord.js';
-import { BaseCommand } from '../types/BaseCommand';
-import { AudioManager } from '../utils/audioManager';
-import config from '../config';
+<span class="cstat-no" title="statement not covered" >import { BaseCommand } from '../types/BaseCommand';</span>
+<span class="cstat-no" title="statement not covered" >import { AudioManager } from '../utils/audioManager';</span>
+<span class="cstat-no" title="statement not covered" >import config from '../config';</span>
 &nbsp;
 class SongsCommand extends BaseCommand {
-  name = 'songs';
-  aliases = ['songlist'];
-  description = 'Muestra la lista de canciones disponibles';
+  name = <span class="cstat-no" title="statement not covered" >'songs';</span>
+  aliases = <span class="cstat-no" title="statement not covered" >['songlist'];</span>
+  description = <span class="cstat-no" title="statement not covered" >'Muestra la lista de canciones disponibles';</span>
 &nbsp;
-  async execute(message: Message): Promise&lt;void&gt; {
-    const songs = AudioManager.getAvailableSongs();
+<span class="fstat-no" title="function not covered" >  async </span>execute(message: Message): Promise&lt;void&gt; {
+    const songs = <span class="cstat-no" title="statement not covered" >AudioManager.getAvailableSongs();</span>
 &nbsp;
-    if (songs.length === 0) {
-      const response = 'No hay canciones disponibles en el momento.';
-      await this.logAndReply(message, response);
-      return;
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (songs.length === 0) {</span>
+      const response = <span class="cstat-no" title="statement not covered" >'No hay canciones disponibles en el momento.';</span>
+<span class="cstat-no" title="statement not covered" >      await this.logAndReply(message, response);</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
     }
 &nbsp;
-    const songList = songs.map((song: string, index: number) =&gt; `${index + 1}. ${song}`).join('\n');
-    const response = `🎵 **Canciones disponibles:**\n\`\`\`\n${songList}\n\`\`\`\nPara reproducir una canción, usa \`${config.prefix}play &lt;nombre del archivo&gt;\``;
-    await this.logAndReply(message, response);
+    const songList = <span class="cstat-no" title="statement not covered" >songs.map(<span class="fstat-no" title="function not covered" >(s</span>ong: string, index: number) =&gt; <span class="cstat-no" title="statement not covered" >`${index + 1}. ${song}`)</span>.join('\n');</span>
+    const response = <span class="cstat-no" title="statement not covered" >`🎵 **Canciones disponibles:**\n\`\`\`\n${songList}\n\`\`\`\nPara reproducir una canción, usa \`${config.prefix}play &lt;nombre del archivo&gt;\``;</span>
+<span class="cstat-no" title="statement not covered" >    await this.logAndReply(message, response);</span>
   }
 }
 &nbsp;
-export default new SongsCommand();
+<span class="cstat-no" title="statement not covered" >export default new SongsCommand();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -148,7 +148,7 @@ export default new SongsCommand();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-20T15:14:28.980Z
+                at 2025-03-21T02:16:05.007Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

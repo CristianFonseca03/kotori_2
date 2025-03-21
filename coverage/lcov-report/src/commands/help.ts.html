@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">70.37% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/27</span>
+                <span class='fraction'>19/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/5</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">70.37% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/27</span>
+                <span class='fraction'>19/27</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -126,36 +126,36 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -181,17 +181,17 @@ class HelpCommand extends BaseCommand {
     const commandManager = new CommandManager(); // Crear instancia de CommandManager
     const commands = commandManager.getAllCommands();
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (commandName) {
-      const command = <span class="cstat-no" title="statement not covered" >commands.find(</span>
+    if (commandName) {
+      const command = commands.find(
 <span class="fstat-no" title="function not covered" >        (c</span>md: { name: string; aliases?: string[] }) =&gt;
 <span class="cstat-no" title="statement not covered" >          cmd.name.toLowerCase() === commandName ||</span>
           cmd.aliases?.some(<span class="fstat-no" title="function not covered" >(a</span>lias: string) =&gt; <span class="cstat-no" title="statement not covered" >alias.toLowerCase() === commandName)</span>
       );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (!command) {</span>
-        const response = <span class="cstat-no" title="statement not covered" >`❌ El comando "${commandName}" no existe. Usa \`${config.prefix}help\` para ver la lista de comandos disponibles.`;</span>
-<span class="cstat-no" title="statement not covered" >        await this.logAndReply(message, response);</span>
-<span class="cstat-no" title="statement not covered" >        return;</span>
+      if (!command) {
+        const response = `❌ El comando "${commandName}" no existe. Usa \`${config.prefix}help\` para ver la lista de comandos disponibles.`;
+        await this.logAndReply(message, response);
+        return;
       }
 &nbsp;
       const aliasesText = <span class="cstat-no" title="statement not covered" >command.aliases?.length</span>
@@ -205,8 +205,8 @@ class HelpCommand extends BaseCommand {
 &nbsp;
     const commandList = commands
       .map(
-        (cmd: { name: string; description: string }) =&gt;
-          `\`${config.prefix}${cmd.name}\` - ${cmd.description}`
+<span class="fstat-no" title="function not covered" >        (c</span>md: { name: string; description: string }) =&gt;
+<span class="cstat-no" title="statement not covered" >          `\`${config.prefix}${cmd.name}\` - ${cmd.description}`</span>
       )
       .join('\n');
 &nbsp;
@@ -223,7 +223,7 @@ export default new HelpCommand();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-20T15:14:28.980Z
+                at 2025-03-21T02:16:05.007Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
