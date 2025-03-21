@@ -93,6 +93,12 @@ kotori2/
 │       ├── play.ts              # Comando para reproducir audio
 │       ├── songs.ts             # Comando para listar canciones
 │       └── help.ts              # Comando de ayuda
+├── tests/                       # Pruebas unitarias
+│   ├── __mocks__/              # Mocks para pruebas
+│   ├── commands/               # Pruebas de comandos
+│   ├── utils/                  # Pruebas de utilidades
+│   ├── helpers/                # Helpers para pruebas
+│   └── types/                  # Tipos para pruebas
 ├── dist/                        # Código compilado
 ├── .env                         # Variables de entorno
 ├── package.json                 # Dependencias y scripts
@@ -126,7 +132,17 @@ kotori2/
 
 ## Pruebas y Cobertura
 
-El proyecto utiliza Jest como framework de pruebas. Las pruebas se encuentran en archivos con sufijo `.test.ts` junto a los archivos de implementación.
+Para una guía completa sobre las pruebas, incluyendo convenciones, mejores prácticas y configuración, consulta el archivo [TESTING.md](./TESTING.md).
+
+El proyecto utiliza Jest como framework de pruebas. Las pruebas se encuentran en archivos con sufijo `.test.ts` en la carpeta `/tests` organizados según la estructura del código fuente.
+
+### Estado actual de pruebas
+
+Se han implementado pruebas para:
+
+- Comandos: ping, help, play
+- Utilidades: audioPlayer
+- Sistema completo de mocks para Discord.js
 
 ### Ejecución de pruebas
 
@@ -149,6 +165,8 @@ El proyecto tiene establecido un objetivo mínimo de cobertura del 70% para:
 - Funciones
 - Ramas
 - Declaraciones
+
+La cobertura actual es de aproximadamente 41.96%.
 
 Puedes ver los informes de cobertura actualizados en:
 
